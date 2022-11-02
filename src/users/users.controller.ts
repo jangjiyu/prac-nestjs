@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import {
   ApiBadGatewayResponse,
   ApiForbiddenResponse,
@@ -13,9 +21,12 @@ import {
 } from '@nestjs/swagger';
 import { User } from 'src/common/decorators/user.decorator';
 import { UserDto } from 'src/common/dto/user.dto';
+import { UndefinedToNullInterceptor } from 'src/common/interceptors/undefinedToNull.interceptor';
 import { JoinRequestDto } from './dto/join.request.dto';
 import { UsersService } from './users.service';
 
+@UseInterceptors(UndefinedToNullInterceptor)
+// @UseInterceptors 데코레이터는 컨트롤러 전체에 적용도 가능 + 개별 라우터에만도 적용 가능
 @ApiTags('USER')
 @Controller('api/users')
 export class UsersController {
