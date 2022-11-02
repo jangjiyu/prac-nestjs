@@ -9,11 +9,7 @@ export class AppService {
     return 'Hello World!';
   }
 
-  getUser(): string {
-    return this.configService.get('NAME'); // nest가 관리해주는 process.env?
-  }
-
-  postUser(): string {
-    return 'Hello World!';
+  getPong(): string {
+    return this.configService.get('PONG'); // nest가 관리해주는 process.env?
   }
 }
